@@ -38,19 +38,19 @@ const cartReducer = (state, action) => {
     );
     
     console.log("this is existingItemIndex : "+existingItemIndex)
-    // let updatedItems;
+     let updatedItems;
      const existingItem = state.items[existingItemIndex];
      console.log("existitem :",existingItem);
      const updatedTotalAmount = state.totalAmount - existingItem.price;
-    // if (existingItem.amount === 1) {
-    //   updatedItems = state.items.filter((item) => action.id !== item.id);
-    // } else {
-    //   updatedItems = { ...existingItem, amount: existingItem.amount - 1 };
-    //   updatedItems = [...state.items];
-    //   updatedItems[existingItemIndex] = updatedItems;
-    // }
+    if (+existingItem.amount === 1) {
+      updatedItems = state.items.filter((item) => action.id !== item.id);
+    } else {
+      updatedItems = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItems;
+    }
 
-    // return { items: updatedItems, totalAmount: updatedTotalAmount };
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
 
   return defaultCartState;
